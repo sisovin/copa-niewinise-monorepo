@@ -1,0 +1,37 @@
+import User from '../models/user.model';
+import Course from '../models/course.model';
+
+const seedUsers = async () => {
+  const users = [
+    { username: 'john_doe', email: 'john@example.com', password: 'password123' },
+    { username: 'jane_doe', email: 'jane@example.com', password: 'password123' },
+  ];
+
+  for (const user of users) {
+    await User.create(user);
+  }
+};
+
+const seedCourses = async () => {
+  const courses = [
+    { title: 'Introduction to Programming', description: 'Learn the basics of programming.' },
+    { title: 'Advanced JavaScript', description: 'Deep dive into JavaScript.' },
+  ];
+
+  for (const course of courses) {
+    await Course.create(course);
+  }
+};
+
+const seedDatabase = async () => {
+  await seedUsers();
+  await seedCourses();
+};
+
+seedDatabase()
+  .then(() => {
+    console.log('Database seeded successfully');
+  })
+  .catch((err) => {
+    console.error('Error seeding database', err);
+  });
